@@ -1,18 +1,18 @@
 <?php
 
+use App\Exceptions\Tournaments\InvalidMatchPairException;
+use App\Http\Controllers\TournamentController;
+use App\Managers\TournamentManager;
+use App\Models\Team;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::prefix('tournaments')->group(function () {
+    Route::get('/', [TournamentController::class, 'index'])->name('tournaments.index');
+    Route::post('/', [TournamentController::class, 'store'])->name('tournaments.store');
 
-Route::get('/', function () {
-    return view('welcome');
+    Route::get('/{tournamentId}', [TournamentController::class, 'show'])->name('tournaments.show');
+    Route::get('/{tournamentId}/simulation', [TournamentController::class, 'simulation'])->name('tournaments.simulation');
+    
+    Route::post('/{tournamentId}/play', [TournamentController::class, 'play'])->name('tournaments.play');
+    Route::post('/{tournamentId}/reset', [TournamentController::class, 'reset'])->name('tournaments.reset');
 });
