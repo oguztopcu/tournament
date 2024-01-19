@@ -1,10 +1,9 @@
 <?php
 
-use App\Exceptions\Tournaments\InvalidMatchPairException;
 use App\Http\Controllers\TournamentController;
-use App\Managers\TournamentManager;
-use App\Models\Team;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/', fn () => redirect()->route('tournaments.index'));
 
 Route::prefix('tournaments')->group(function () {
     Route::get('/', [TournamentController::class, 'index'])->name('tournaments.index');
